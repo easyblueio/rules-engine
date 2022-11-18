@@ -1,0 +1,9 @@
+parameters:
+    level: 9
+    scanDirectories:
+        - ./src
+    treatPhpDocTypesAsCertain: false
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    inferPrivatePropertyTypeFromConstructor: true
+    editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
