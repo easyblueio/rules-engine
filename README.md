@@ -37,6 +37,17 @@ $profilesRuleEngine->process($user);
 
 ### In Symfony app
 
+First, register the bundle in `config/bundles.php`
+
+```php
+<?php
+
+return [
+    // ...
+    \Easyblue\RulesEngine\Symfony\RuleEngineBundle::class => ['all' => true],
+];
+```
+
 You can configure engines in `config/packages/rules_engine.{yaml|php|...}`
 
 ```yaml
