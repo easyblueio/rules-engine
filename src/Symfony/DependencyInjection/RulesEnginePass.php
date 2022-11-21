@@ -9,9 +9,9 @@ declare(strict_types = 1);
  * file that was distributed with this source code.
  */
 
-namespace Easyblueio\RulesEngine\Symfony\DependencyInjection;
+namespace Easyblue\RulesEngine\Symfony\DependencyInjection;
 
-use Easyblueio\RulesEngine\Core\ProcessorInterface;
+use Easyblue\RulesEngine\Core\ProcessorInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;

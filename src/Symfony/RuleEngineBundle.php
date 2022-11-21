@@ -9,10 +9,10 @@ declare(strict_types = 1);
  * file that was distributed with this source code.
  */
 
-namespace Easyblueio\RulesEngine\Symfony;
+namespace Easyblue\RulesEngine\Symfony;
 
-use Easyblueio\RulesEngine\Symfony\DependencyInjection\RulesEngineExtension;
-use Easyblueio\RulesEngine\Symfony\DependencyInjection\RulesEnginePass;
+use Easyblue\RulesEngine\Symfony\DependencyInjection\RulesEngineExtension;
+use Easyblue\RulesEngine\Symfony\DependencyInjection\RulesEnginePass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;

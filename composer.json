@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Easyblueio\\RulesEngine\\": "src/"
+            "Easyblue\\RulesEngine\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Easyblueio\\RulesEngine\\Test\\": "tests/"
+            "Easyblue\\RulesEngine\\Test\\": "tests/"
         }
     },
     "config": {

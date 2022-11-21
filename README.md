@@ -18,7 +18,7 @@ composer require easyblue/rules-engine
 You can create an instance of rule engine with passing processor.
 
 ``` php
-use Easyblueio\RulesEngine\Core\RulesEngine;
+use Easyblue\RulesEngine\Core\RulesEngine;
 use Acme\RulesEngine\Profile;
 
 $profilesRuleEngine = new RulesEngine(
@@ -47,10 +47,10 @@ rules_engine:
 ````
 
 The key `profile` is the name of the engine that will process on each `rules_engine.profile.processor` tagged service.
-You simply can extend `Easyblueio\RulesEngine\Core\ProcessorInterface` like this :
+You simply can extend `Easyblue\RulesEngine\Core\ProcessorInterface` like this :
 
 ``` php
-use Easyblueio\RulesEngine\Core\ProcessorInterface;
+use Easyblue\RulesEngine\Core\ProcessorInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag('rules_engine.profile.processor')]
@@ -58,10 +58,10 @@ interface ProfileProcessorInterface extends ProcessorInterface {
 }
 ```
 
-An instance of `Easyblueio\RulesEngine\Core\RulesEngine` is available in the container, so you can inject it in your services.
+An instance of `Easyblue\RulesEngine\Core\RulesEngine` is available in the container, so you can inject it in your services.
 
 ``` php
-use Easyblueio\RulesEngine\Core\RulesEngine;
+use Easyblue\RulesEngine\Core\RulesEngine;
 
 final class ProfileController {
     public function __construct(private readonly RulesEngine $profileRulesEngine)
