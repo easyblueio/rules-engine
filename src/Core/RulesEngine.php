@@ -20,27 +20,21 @@ class RulesEngine
     ) {
     }
 
-    public function process(object $subject, ?array $context = []): mixed
+    public function process(object $subject, ?array $context = []): void
     {
-        $processValue = null;
-
         foreach ($this->processors as $processor) {
             if (!$processor instanceof ProcessorInterface) {
                 throw new \LogicException();
             }
 
             if ($processor->supports($subject, $context)) {
-                $processValue = $processor->process($subject, $context);
+                $processor->process($subject, $context);
 
                 if (!$this->isChained()) {
                     break;
                 }
-
-                $context['previous'] = $processValue;
             }
         }
-
-        return $processValue;
     }
 
     private function isChained(): bool

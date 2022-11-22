@@ -15,7 +15,7 @@ interface ProcessorInterface
 {
     public static function getPriority(): int;
 
-    public function supports(object $subject, ?array $context = []): bool;
+    public function supports(object $subject, array $context): bool;
 
-    public function process(object $subject, ?array $context = []): mixed;
+    public function process(object $subject, array &$context): void;
 }
