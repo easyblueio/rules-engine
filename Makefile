@@ -15,7 +15,7 @@ test-coverage: vendor
 composer.lock: composer.json
 	$(COMPOSER) update --lock --no-scripts --no-interaction
 
-vendor: composer.lock
+vendor:
 	$(COMPOSER) install
 
 composer-require:
