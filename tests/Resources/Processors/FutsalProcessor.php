@@ -9,10 +9,10 @@ declare(strict_types = 1);
  * file that was distributed with this source code.
  */
 
-namespace Easyblue\RulesEngine\Test\Processors;
+namespace Easyblue\RulesEngine\Test\Resources\Processors;
 
 use Easyblue\RulesEngine\Core\ProcessorInterface;
-use Easyblue\RulesEngine\Test\SportDto;
+use Easyblue\RulesEngine\Test\Resources\SportDto;
 
 final class FutsalProcessor implements ProcessorInterface
 {

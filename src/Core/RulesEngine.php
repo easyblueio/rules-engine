@@ -17,11 +17,16 @@ class RulesEngine
         public readonly string $name,
         public readonly array $options,
         public readonly array $processors,
+        public readonly ?ContextBuilderInterface $contextBuilder = null,
     ) {
     }
 
-    public function process(object $subject, ?array $context = []): void
+    public function process(object $subject, array $context = []): void
     {
+        if ($this->contextBuilder instanceof ContextBuilderInterface) {
+            $context = $this->contextBuilder->buildContext($subject, $context);
+        }
+
         foreach ($this->processors as $processor) {
             if (!$processor instanceof ProcessorInterface) {
                 throw new \LogicException();
