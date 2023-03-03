@@ -7,15 +7,15 @@ COMPOSER = composer
 
 test: ## Run unit and functional tests
 test: vendor
-	php ./vendor/bin/phpunit
+	php ./vendor/bin/simple-phpunit --testdox
 
 test-coverage: vendor
-	php ./vendor/bin/phpunit  --coverage-html build/coverage
+	php ./vendor/bin/simple-phpunit  --coverage-html build/coverage
 
 composer.lock: composer.json
 	$(COMPOSER) update --lock --no-scripts --no-interaction
 
-vendor: composer.lock
+vendor:
 	$(COMPOSER) install
 
 composer-require:

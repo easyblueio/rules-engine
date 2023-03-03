@@ -20,9 +20,10 @@ concurrency:
 
 env:
   COMPOSER_ROOT_VERSION: "1.99.99"
+  PHP_CS_FIXER_IGNORE_ENV: 1
 
 jobs:
-  coding-standards:
+  ci:
     name: "Coding standards"
     runs-on: "ubuntu-latest"
     steps:
@@ -35,25 +36,28 @@ jobs:
           php-version: "latest"
           coverage: "none"
 
-      - name: "Install dependencies (Composer)"
-        uses: "ramsey/composer-install@v2"
+      - name: Install dev vendor
+        run: make vendor
 
-      -   name: PHPStan
-          id: phpstan
-          run: make apply-phpstan
+      - name: Tests
+        run: make test
 
-      -   name: Security
-          id: security
-          run: make security
+      - name: PHPStan
+        id: phpstan
+        run: make apply-phpstan
 
-      -   name: PHP Mess Detector
-          id: phpmd
-          run: make apply-phpmd
+      - name: Security
+        id: security
+        run: make security
 
-      -   name: PHP-cs-fixer
-          id: phpcsfixer
-          run: make check-php-cs
+      - name: PHP Mess Detector
+        id: phpmd
+        run: make apply-phpmd
 
-      -   name: PHPCPD
-          id: phpcpd
-          run: make apply-phpcpd
+      - name: PHP-cs-fixer
+        id: phpcsfixer
+        run: make check-php-cs
+
+      - name: PHPCPD
+        id: phpcpd
+        run: make apply-phpcpd
