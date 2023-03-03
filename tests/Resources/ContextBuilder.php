@@ -12,24 +12,23 @@ declare(strict_types = 1);
 namespace Easyblue\RulesEngine\Test\Resources;
 
 use Easyblue\RulesEngine\Core\ContextBuilderInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
+#[AutoconfigureTag('rules_engine.sport.context_builder')]
 final class ContextBuilder implements ContextBuilderInterface
 {
-    public function __construct(private readonly array $user)
-    {
-    }
-
     public function buildContext(object $subject, array $context): array
     {
-        if (10 > $this->getUserAge()) {
+        if (10 > $this->getUserAge($context)) {
             $context['ballSize'] = 3;
         }
 
         return $context;
     }
 
-    private function getUserAge(): ?int
+    private function getUserAge(array $context): ?int
     {
-        return $this->user['age'] ?? null;
+        // Could also get user from security and check age
+        return $context['age'] ?? null;
     }
 }

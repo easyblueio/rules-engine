@@ -25,15 +25,15 @@ class RulesEngineTest extends TestCase
     // <editor-fold desc="Chained Rules Engine">
     public function providesContextBuilder(): \Generator
     {
-        yield 'no context builder' => ['ballSize' => 5, 'contextBuilder' => null];
-        yield '   context builder age > 10' => ['ballSize' => 5, 'contextBuilder' => new ContextBuilder(['age' => 11])];
-        yield '   context builder age < 10' => ['ballSize' => 3, 'contextBuilder' => new ContextBuilder(['age' => 8])];
+        yield 'no context builder' => ['ballSize' => 5, 'contextBuilder' => null, 'context' => []];
+        yield '   context builder age > 10' => ['ballSize' => 5, 'contextBuilder' => new ContextBuilder(), 'context' => ['age' => 11]];
+        yield '   context builder age < 10' => ['ballSize' => 3, 'contextBuilder' => new ContextBuilder(), 'context' => ['age' => 8]];
     }
 
     /**
      * @dataProvider providesContextBuilder
      */
-    public function testChainedCaseFutsal(int $ballSize, ?ContextBuilderInterface $contextBuilder): void
+    public function testChainedCaseFutsal(int $ballSize, ?ContextBuilderInterface $contextBuilder, array $context): void
     {
         $rulesEngine = new RulesEngine('chained-case', ['chained' => true], $this->getProcessors(), $contextBuilder);
 
@@ -41,7 +41,7 @@ class RulesEngineTest extends TestCase
         $subject->sport        = 'football';
         $subject->sportVariant = 'futsal';
 
-        $rulesEngine->process($subject);
+        $rulesEngine->process($subject, $context);
 
         self::assertTrue($subject->needsBall ?? null, sprintf('"needsBall" is wrong, see "%s"', FootballProcessor::class));
         self::assertFalse($subject->needsRacket ?? null, sprintf('"needsRacket" is wrong, see "%s"', FootballProcessor::class));

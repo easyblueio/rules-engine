@@ -17,8 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
-/** @deprecated Use `RulesEngineBundle` class */
-final class RuleEngineBundle extends AbstractBundle
+final class RulesEngineBundle extends AbstractBundle
 {
     public function getPath(): string
     {
