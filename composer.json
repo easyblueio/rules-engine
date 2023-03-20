@@ -19,6 +19,7 @@
         "php": "^8.1",
         "symfony/config": "^6.1",
         "symfony/dependency-injection": "^6.1",
+        "symfony/framework-bundle": "^6.2",
         "symfony/http-kernel": "^6.1",
         "symfony/string": "^6.1"
     },

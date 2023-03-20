@@ -9,12 +9,14 @@ declare(strict_types = 1);
  * file that was distributed with this source code.
  */
 
-namespace Easyblue\RulesEngine\Test\Processors;
+namespace Easyblue\RulesEngine\Test\Resources\Processors;
 
 use Easyblue\RulesEngine\Core\ProcessorInterface;
-use Easyblue\RulesEngine\Test\SportDto;
+use Easyblue\RulesEngine\Test\Resources\SportDto;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
-final class FootballProcessor implements ProcessorInterface
+#[AutoconfigureTag('rules_engine.sport.processor')]
+final class SquashProcessor implements ProcessorInterface
 {
     public static function getPriority(): int
     {
@@ -26,7 +28,7 @@ final class FootballProcessor implements ProcessorInterface
      */
     public function supports(object $subject, array $context): bool
     {
-        return 'football' === ($subject->sport ?? null);
+        return 'squash' === ($subject->sport ?? null);
     }
 
     /**
@@ -35,7 +37,7 @@ final class FootballProcessor implements ProcessorInterface
     public function process(object $subject, array &$context): void
     {
         $subject->needsBall   = true;
-        $subject->needsRacket = false;
+        $subject->needsRacket = true;
 
         // Do some logic, dispatch events ou messages...
     }

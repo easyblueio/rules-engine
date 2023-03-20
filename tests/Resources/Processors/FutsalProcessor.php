@@ -9,11 +9,13 @@ declare(strict_types = 1);
  * file that was distributed with this source code.
  */
 
-namespace Easyblue\RulesEngine\Test\Processors;
+namespace Easyblue\RulesEngine\Test\Resources\Processors;
 
 use Easyblue\RulesEngine\Core\ProcessorInterface;
-use Easyblue\RulesEngine\Test\SportDto;
+use Easyblue\RulesEngine\Test\Resources\SportDto;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
+#[AutoconfigureTag('rules_engine.sport.processor')]
 final class FutsalProcessor implements ProcessorInterface
 {
     public static function getPriority(): int

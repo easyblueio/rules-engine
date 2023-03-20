@@ -6,6 +6,9 @@
          colors="true"
          verbose="true">
 
+    <php>
+        <server name="KERNEL_CLASS" value="Easyblue\RulesEngine\Test\HttpKernel\RulesEngineHttpKernel" />
+    </php>
     <testsuites>
         <testsuite name="unit-tests">
             <directory>./tests</directory>

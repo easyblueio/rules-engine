@@ -44,7 +44,7 @@ First, register the bundle in `config/bundles.php`
 
 return [
     // ...
-    \Easyblue\RulesEngine\Symfony\RuleEngineBundle::class => ['all' => true],
+    \Easyblue\RulesEngine\Symfony\RulesEngineBundle::class => ['all' => true],
 ];
 ```
 

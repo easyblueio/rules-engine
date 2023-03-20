@@ -9,7 +9,7 @@ declare(strict_types = 1);
  * file that was distributed with this source code.
  */
 
-namespace Easyblue\RulesEngine\Test;
+namespace Easyblue\RulesEngine\Test\Resources;
 
 final class SportDto
 {
