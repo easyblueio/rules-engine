@@ -13,7 +13,10 @@ namespace Easyblue\RulesEngine\Core;
 
 interface ProcessorInterface
 {
-    public static function getPriority(): int;
+    /**
+     * @deprecated Priority is now a tag attribute
+     */
+    public static function getPriority(): ?int;
 
     public function supports(object $subject, array $context): bool;
 
