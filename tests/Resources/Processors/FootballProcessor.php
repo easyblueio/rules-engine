@@ -15,12 +15,12 @@ use Easyblue\RulesEngine\Core\ProcessorInterface;
 use Easyblue\RulesEngine\Test\Resources\SportDto;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
-#[AutoconfigureTag('rules_engine.sport.processor')]
+#[AutoconfigureTag('rules_engine.sport.processor', ['priority' => 10])]
 final class FootballProcessor implements ProcessorInterface
 {
-    public static function getPriority(): int
+    public static function getPriority(): ?int
     {
-        return 10;
+        return null;
     }
 
     /**

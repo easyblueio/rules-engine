@@ -15,7 +15,6 @@ use Easyblue\RulesEngine\Core\ProcessorInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\String\UnicodeString;
 
 final class RulesEnginePass implements CompilerPassInterface
 {
@@ -26,26 +25,24 @@ final class RulesEnginePass implements CompilerPassInterface
 
             /** @var string $name */
             $name       = $definition->getArgument(0);
-            $snakedName = (new UnicodeString($name))->snake()->toString();
 
-            $definition->addArgument($this->getProcessorsReferences($container, $snakedName));
+            $definition->addArgument($this->getProcessorsReferences($container, $name));
             $definition->addArgument($this->getContextBuilderReference($container, $name));
         }
     }
 
-    private function getProcessorsReferences(ContainerBuilder $container, string $snakedName): array
+    private function getProcessorsReferences(ContainerBuilder $container, string $name): array
     {
-        $tag = sprintf(
-            'rules_engine.%s.processor',
-            $snakedName,
-        );
+        $tag = NamingUtil::getProcessorTagName($name);
 
         $processorsByPriority = [];
         foreach (array_keys($container->findTaggedServiceIds($tag)) as $processorId) {
-            $definition = $container->getDefinition($processorId);
+            $definition    = $container->getDefinition($processorId);
+            $tagAttributes = $definition->getTag($tag);
+
             /** @var class-string<ProcessorInterface> $processorClass */
             $processorClass                     = $definition->getClass();
-            $processorsByPriority[$processorId] = $processorClass::getPriority();
+            $processorsByPriority[$processorId] = $tagAttributes['priority'] ?? $processorClass::getPriority() ?? 0;
         }
 
         array_multisort($processorsByPriority, SORT_DESC);
@@ -55,10 +52,7 @@ final class RulesEnginePass implements CompilerPassInterface
 
     private function getContextBuilderReference(ContainerBuilder $container, string $name): ?Reference
     {
-        $taggedServiceIds = $container->findTaggedServiceIds(sprintf(
-            'rules_engine.%s.context_builder',
-            (new UnicodeString($name))->snake()->toString(),
-        ));
+        $taggedServiceIds = $container->findTaggedServiceIds(NamingUtil::getContextBuilderTagName($name));
 
         if (1 < count($taggedServiceIds)) {
             throw new \LogicException(sprintf('RulesEngine "%s" should defined only one context builder.', $name));
