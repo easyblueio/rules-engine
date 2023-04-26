@@ -58,14 +58,15 @@ rules_engine:
 ````
 
 The key `profile` is the name of the engine that will process on each `rules_engine.profile.processor` tagged service.
-You simply can extend `Easyblue\RulesEngine\Core\ProcessorInterface` like this :
+You simply can implements `Easyblue\RulesEngine\Core\ProcessorInterface` and use `AsProcessor` attribute like this :
 
 ``` php
 use Easyblue\RulesEngine\Core\ProcessorInterface;
-use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+use Easyblue\RulesEngine\Symfony\Attribute\AsProcessor;
 
-#[AutoconfigureTag('rules_engine.profile.processor')]
-interface ProfileProcessorInterface extends ProcessorInterface {
+#[AsProcessor('profile', 10)]
+class ProfileProcessor implements ProcessorInterface {
+    // ...
 }
 ```
 
@@ -82,7 +83,6 @@ final class ProfileController {
 ```
 
 List all engines configured with `bin/console debug:autowiring rules_engine`
-
 
 ## Contributing
 

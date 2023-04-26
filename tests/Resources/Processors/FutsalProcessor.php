@@ -12,15 +12,15 @@ declare(strict_types = 1);
 namespace Easyblue\RulesEngine\Test\Resources\Processors;
 
 use Easyblue\RulesEngine\Core\ProcessorInterface;
+use Easyblue\RulesEngine\Symfony\Attribute\AsProcessor;
 use Easyblue\RulesEngine\Test\Resources\SportDto;
-use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
-#[AutoconfigureTag('rules_engine.sport.processor')]
+#[AsProcessor('sport')]
 final class FutsalProcessor implements ProcessorInterface
 {
-    public static function getPriority(): int
+    public static function getPriority(): ?int
     {
-        return 0;
+        return null;
     }
 
     /**

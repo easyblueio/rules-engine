@@ -12,11 +12,12 @@ declare(strict_types = 1);
 namespace Easyblue\RulesEngine\Symfony\DependencyInjection;
 
 use Easyblue\RulesEngine\Core\RulesEngine;
+use Easyblue\RulesEngine\Symfony\Attribute\AsProcessor;
 use Easyblue\RulesEngine\Symfony\DependencyInjection\Configuration\RulesEngineConfiguration;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\String\UnicodeString;
 
 final class RulesEngineExtension extends Extension
 {
@@ -34,13 +35,14 @@ final class RulesEngineExtension extends Extension
             ]);
             $definition->addTag('rules_engine.engines');
 
-            $ruleEngineId = sprintf('rules_engine.%s.engine', (new UnicodeString($engineName))->snake()->toString());
+            $ruleEngineId = NamingUtil::getRulesEngineAliasName($engineName);
 
             $container->setDefinition($ruleEngineId, $definition);
-            $container->registerAliasForArgument($ruleEngineId, RulesEngine::class, sprintf(
-                '%sRulesEngine',
-                (new UnicodeString($engineName))->camel()->toString()
-            ));
+            $container->registerAliasForArgument($ruleEngineId, RulesEngine::class, NamingUtil::getRulesEngineArgumentName($engineName));
         }
+
+        $container->registerAttributeForAutoconfiguration(AsProcessor::class, static function (ChildDefinition $definition, AsProcessor $attribute) {
+            $definition->addTag(NamingUtil::getProcessorTagName($attribute->rulesEngineName), ['priority' => $attribute->priority]);
+        });
     }
 }
