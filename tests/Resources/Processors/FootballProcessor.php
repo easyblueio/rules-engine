@@ -18,11 +18,6 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 #[AutoconfigureTag('rules_engine.sport.processor', ['priority' => 10])]
 final class FootballProcessor implements ProcessorInterface
 {
-    public static function getPriority(): ?int
-    {
-        return null;
-    }
-
     /**
      * @param SportDto $subject
      */
