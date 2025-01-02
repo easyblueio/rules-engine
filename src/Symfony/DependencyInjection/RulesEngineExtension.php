@@ -17,7 +17,7 @@ use Easyblue\RulesEngine\Symfony\DependencyInjection\Configuration\RulesEngineCo
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 
 final class RulesEngineExtension extends Extension
 {

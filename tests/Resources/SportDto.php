@@ -15,8 +15,8 @@ final class SportDto
 {
     public ?string $sport            = null;
     public ?string $sportVariant     = null;
-    public ?bool   $needsBall        = null;
-    public ?bool   $needsRacket      = null;
-    public ?bool   $withLateralWalls = null;
-    public ?int    $ballSize         = null;
+    public ?bool $needsBall          = null;
+    public ?bool $needsRacket        = null;
+    public ?bool $withLateralWalls   = null;
+    public ?int $ballSize            = null;
 }
