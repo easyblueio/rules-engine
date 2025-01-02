@@ -18,11 +18,6 @@ use Easyblue\RulesEngine\Test\Resources\SportDto;
 #[AsProcessor('sport', 10)]
 final class SquashProcessor implements ProcessorInterface
 {
-    public static function getPriority(): ?int
-    {
-        return null;
-    }
-
     /**
      * @param SportDto $subject
      */

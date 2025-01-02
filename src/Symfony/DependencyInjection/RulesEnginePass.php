@@ -11,7 +11,6 @@ declare(strict_types = 1);
 
 namespace Easyblue\RulesEngine\Symfony\DependencyInjection;
 
-use Easyblue\RulesEngine\Core\ProcessorInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -24,7 +23,7 @@ final class RulesEnginePass implements CompilerPassInterface
             $definition = $container->getDefinition($ruleEngineId);
 
             /** @var string $name */
-            $name       = $definition->getArgument(0);
+            $name = $definition->getArgument(0);
 
             $definition->addArgument($this->getProcessorsReferences($container, $name));
             $definition->addArgument($this->getContextBuilderReference($container, $name));
@@ -37,17 +36,15 @@ final class RulesEnginePass implements CompilerPassInterface
 
         $processorsByPriority = [];
         foreach (array_keys($container->findTaggedServiceIds($tag)) as $processorId) {
-            $definition    = $container->getDefinition($processorId);
-            $tagAttributes = $definition->getTag($tag);
-
-            /** @var class-string<ProcessorInterface> $processorClass */
-            $processorClass                     = $definition->getClass();
-            $processorsByPriority[$processorId] = $tagAttributes['priority'] ?? $processorClass::getPriority() ?? 0;
+            $definition                         = $container->getDefinition($processorId);
+            $tagAttributes                      = $definition->getTag($tag);
+            $processorsByPriority[$processorId] = $tagAttributes['priority'] ?? 0;
         }
 
         array_multisort($processorsByPriority, SORT_DESC);
 
-        return array_map(static fn (string $processorId) => new Reference($processorId), array_keys($processorsByPriority));
+        return array_map(static fn (string $processorId) => new Reference($processorId),
+            array_keys($processorsByPriority));
     }
 
     private function getContextBuilderReference(ContainerBuilder $container, string $name): ?Reference
