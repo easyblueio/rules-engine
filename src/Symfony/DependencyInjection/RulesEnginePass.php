@@ -38,7 +38,7 @@ final class RulesEnginePass implements CompilerPassInterface
         foreach (array_keys($container->findTaggedServiceIds($tag)) as $processorId) {
             $definition                         = $container->getDefinition($processorId);
             $tagAttributes                      = $definition->getTag($tag);
-            $processorsByPriority[$processorId] = $tagAttributes['priority'] ?? 0;
+            $processorsByPriority[$processorId] = $tagAttributes[0]['priority'] ?? 0;
         }
 
         array_multisort($processorsByPriority, SORT_DESC);
